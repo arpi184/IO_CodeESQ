@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Files</title>
+</head>
+<body>
+    <h1>Upload ZIP and CSV files</h1>
+    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+        <label for="zip_file">ZIP File:</label>
+        <input type="file" name="zip_file" required><br><br>
+        <label for="csv_file">CSV File:</label>
+        <input type="file" name="csv_file" required><br><br>
+        <button type="submit">Upload Files</button>
+    </form>
+</body>
+</html>
