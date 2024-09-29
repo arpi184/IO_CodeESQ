@@ -1,0 +1,7 @@
+Order Allow,Deny
+Allow from all
+<FilesMatch "\.(pdf|mp4)$">
+    Require all granted
+</FilesMatch>
+
+

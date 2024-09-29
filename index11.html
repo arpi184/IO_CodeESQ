@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N.O.D.E.S</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Styles for dropdown and content area */
+        .dropdown-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropbtn {
+            background-color: #f9f9f9;
+            color: black;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {background-color: #f1f1f1}
+        .show {display: block;}
+        .content-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .content-list li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #333766;
+            border-radius: 8px;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .content-list a {
+            color: #C1FF72;
+            text-decoration: none;
+        }
+        .content-list a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load default content
+            loadContent('bio');
+        });
+
+        function loadContent(className) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/getContent?class=' + encodeURIComponent(className), true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    document.getElementById('content').innerHTML = xhr.responseText;
+                } else {
+                    document.getElementById('content').innerHTML = 'Error loading content.';
+                }
+            };
+            xhr.send();
+        }
+
+        // Event listener for dropdown buttons
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            dropdown.querySelector('.dropbtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                dropdown.querySelector('.dropdown-content').classList.toggle('show');
+            });
+        });
+
+        window.addEventListener('click', (e) => {
+            if (!e.target.matches('.dropbtn')) {
+                document.querySelectorAll('.dropdown-content').forEach(content => content.classList.remove('show'));
+            }
+        });
+    </script>
+</head>
+<body>
+    <header class="header">
+        <span class="title" style="font-weight: bold; font-size: 21px;">N.O.D.E.S</span>
+        <span class="welcome" style="padding-right: 70px;">Welcome Shreyash!</span>
+    </header>
+
+    <div class="dropdown-container">
+        <div class="dropdown">
+            <button class="dropbtn" style="border-color: #C1FF72;">
+                <img src="bio-logo.png" alt="bio-logo" style="width: 170px; height: 115px;">
+            </button>
+            <div class="dropdown-content">
+                <a href="#" onclick="loadContent('10bio')">Class 10</a>
+                <a href="#" onclick="loadContent('9bio')">Class 9</a>
+                <a href="#" onclick="loadContent('8bio')">Class 8</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn" style="border-color: #5271FF;">
+                <img src="phy-logo.png" alt="phy-logo" style="width: 170px; height: 115px;">
+            </button>
+            <div class="dropdown-content">
+                <a href="#" onclick="loadContent('10phy')">Class 10</a>
+                <a href="#" onclick="loadContent('9phy')">Class 9</a>
+                <a href="#" onclick="loadContent('8phy')">Class 8</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn" style="border-color: #FF3131;">
+                <img src="chem-logo.png" alt="chem-logo" style="width: 170px; height: 115px;">
+            </button>
+            <div class="dropdown-content">
+                <a href="#" onclick="loadContent('10chem')">Class 10</a>
+                <a href="#" onclick="loadContent('9chem')">Class 9</a>
+                <a href="#" onclick="loadContent('8chem')">Class 8</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn" style="border-color: #FFDE59;">
+                <img src="math-logo.png" alt="math-logo" style="width: 170px; height: 115px;">
+            </button>
+            <div class="dropdown-content">
+                <a href="#" onclick="loadContent('10math')">Class 10</a>
+                <a href="#" onclick="loadContent('9math')">Class 9</a>
+                <a href="#" onclick="loadContent('8math')">Class 8</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
+        <!-- Dynamic content will be loaded here -->
+    </div>
+</body>
+</html>
